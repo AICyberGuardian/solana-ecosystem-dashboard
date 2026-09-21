@@ -1,0 +1,5 @@
+# Core Runtime: Zero external dependencies required.
+# Runs on pure Python 3.10+ standard library (urllib.request, json, math, time, http.server).
+#
+# Optional Development / Test Dependencies:
+pytest>=7.0.0

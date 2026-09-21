@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solana Ecosystem Intelligence Dashboard | Superteam Canada</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090E;
+      --card-bg: rgba(18, 24, 38, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(20, 241, 149, 0.35);
+      --solana-green: #14F195;
+      --solana-purple: #9945FF;
+      --solana-cyan: #00F0FF;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --text-dim: #6B7280;
+      --danger: #EF4444;
+      --warning: #F59E0B;
+      --success: #10B981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 10% 15%, rgba(153, 69, 255, 0.12) 0px, transparent 50%),
+        radial-gradient(at 90% 85%, rgba(20, 241, 149, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(0, 240, 255, 0.04) 0px, transparent 60%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      padding: 24px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--solana-purple), var(--solana-green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(20, 241, 149, 0.3);
+    }
+
+    .logo-badge svg {
+      width: 24px;
+      height: 24px;
+      fill: #000;
+    }
+
+    .title-area h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #FFFFFF, #E0E7FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .title-area p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      background: rgba(20, 241, 149, 0.1);
+      border: 1px solid rgba(20, 241, 149, 0.25);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--solana-green);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--solana-green);
+      box-shadow: 0 0 10px var(--solana-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.7; }
+    }
+
+    .meta-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .bento-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 22px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card:hover {
+      border-color: var(--card-hover-border);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .col-span-1 { grid-column: span 1; }
+    .col-span-2 { grid-column: span 2; }
+    .col-span-3 { grid-column: span 3; }
+    .col-span-4 { grid-column: span 4; }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title .icon {
+      color: var(--solana-green);
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+    }
+
+    .badge-success {
+      background: rgba(20, 241, 149, 0.15);
+      color: var(--solana-green);
+      border: 1px solid rgba(20, 241, 149, 0.3);
+    }
+
+    .badge-warning {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Metric Values */
+    .metric-value-huge {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+      font-feature-settings: "tnum";
+    }
+
+    .metric-value-large {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      font-feature-settings: "tnum";
+    }
+
+    .metric-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .delta-up { color: var(--solana-green); font-weight: 600; }
+    .delta-down { color: var(--danger); font-weight: 600; }
+
+    /* Health Gauge Card */
+    .health-container {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .health-dial {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .health-score-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #FFF;
+      line-height: 1;
+    }
+
+    .health-score-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      text-align: center;
+      margin-top: 2px;
+    }
+
+    .health-pillars {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 220px;
+    }
+
+    .pillar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pillar-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .pillar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .pillar-bar {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, var(--solana-purple), var(--solana-green));
+    }
+
+    /* Progress bar for Epoch */
+    .progress-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 12px 0 8px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--solana-purple), var(--solana-green));
+      border-radius: 9999px;
+    }
+
+    /* Chart wrapper */
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      margin-top: 10px;
+    }
+
+    /* Table styles */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 8px;
+    }
+
+    .styled-table th {
+      text-align: left;
+      padding: 8px 12px;
+      color: var(--text-dim);
+      font-weight: 600;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .styled-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .styled-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .code-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: #93C5FD;
+    }
+
+    /* Anomaly List */
+    .anomaly-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 8px;
+    }
+
+    .anomaly-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .anomaly-icon.CRITICAL { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    .anomaly-icon.WARNING { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+    .anomaly-icon.INFO { background: rgba(20, 241, 149, 0.2); color: var(--solana-green); }
+
+    .anomaly-content h4 {
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .anomaly-content p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    footer a {
+      color: var(--solana-green);
+      text-decoration: none;
+    }
+
+    @media (max-width: 1024px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+      .col-span-1, .col-span-2, .col-span-3, .col-span-4 { grid-column: span 2; }
+    }
+
+    @media (max-width: 640px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .col-span-1, .col-span-2, .col-span-3, .col-span-4 { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand-section">
+        <div class="logo-badge">
+          <svg viewBox="0 0 397 311">
+            <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zM64.6 3.8C67 1.4 70.3 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8zm267.8 113.3c-2.4-2.4-5.7-3.8-9.2-3.8H5.8c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+          </svg>
+        </div>
+        <div class="title-area">
+          <h1>SOLANA ECOSYSTEM INTELLIGENCE</h1>
+          <p>Autonomous Telemetry & Anomaly Detection • Superteam Canada</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <div class="status-pill">
+          <span class="pulse-dot"></span>
+          <span>MAINNET-BETA</span>
+        </div>
+        <div class="meta-time">Updated: <span id="lastUpdated">{{ generated_at_utc }}</span></div>
+      </div>
+    </header>
+
+    <!-- Bento Grid -->
+    <div class="bento-grid">
+      
+      <!-- Health Score Card -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title"><span class="icon">●</span> Ecosystem Health Index</span>
+          <span class="badge badge-success">{{ health_status }}</span>
+        </div>
+        <div class="health-container">
+          <div class="health-dial">
+            <svg viewBox="0 0 100 100" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+              <circle cx="50" cy="50" r="42" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="transparent"/>
+              <circle cx="50" cy="50" r="42" stroke="url(#healthGradient)" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="{{ health_dashoffset }}" stroke-linecap="round" fill="transparent"/>
+              <defs>
+                <linearGradient id="healthGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#9945FF"/>
+                  <stop offset="100%" stop-color="#14F195"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div style="position: absolute; display: flex; flex-direction: column; align-items: center;">
+              <span class="health-score-num">{{ health_score }}</span>
+              <span class="health-score-label">/ 100</span>
+            </div>
+          </div>
+          <div class="health-pillars">
+            <div class="pillar-row">
+              <div class="pillar-meta"><span>Network Liveness & RPC</span><span>{{ pillar_liveness }} / 25 pts</span></div>
+              <div class="pillar-track"><div class="pillar-bar" style="width: {{ pillar_liveness_pct }}%;"></div></div>
+            </div>
+            <div class="pillar-row">
+              <div class="pillar-meta"><span>Throughput & Stability</span><span>{{ pillar_throughput }} / 25 pts</span></div>
+              <div class="pillar-track"><div class="pillar-bar" style="width: {{ pillar_throughput_pct }}%;"></div></div>
+            </div>
+            <div class="pillar-row">
+              <div class="pillar-meta"><span>Validator Security & Nakamoto</span><span>{{ pillar_security }} / 25 pts</span></div>
+              <div class="pillar-track"><div class="pillar-bar" style="width: {{ pillar_security_pct }}%;"></div></div>
+            </div>
+            <div class="pillar-row">
+              <div class="pillar-meta"><span>DeFi & Economic Vitality</span><span>{{ pillar_economic }} / 25 pts</span></div>
+              <div class="pillar-track"><div class="pillar-bar" style="width: {{ pillar_economic_pct }}%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Throughput (TPS) Card -->
+      <div class="bento-card col-span-1">
+        <div class="card-header">
+          <span class="card-title">Throughput</span>
+          <span class="badge">Live RPC</span>
+        </div>
+        <div class="metric-value-huge">{{ current_tps }} <span style="font-size: 1.1rem; color: var(--solana-green);">TPS</span></div>
+        <div class="metric-sub">
+          <span>1h Avg: <strong>{{ avg_tps }} TPS</strong></span>
+          <span>•</span>
+          <span>Peak: <strong>{{ peak_tps }}</strong></span>
+        </div>
+        <div style="margin-top: 14px; height: 60px;">
+          <canvas id="tpsSparkline"></canvas>
+        </div>
+      </div>
+
+      <!-- Slot & Epoch Card -->
+      <div class="bento-card col-span-1">
+        <div class="card-header">
+          <span class="card-title">Consensus Progress</span>
+          <span class="badge">Epoch {{ epoch }}</span>
+        </div>
+        <div class="metric-value-large">{{ epoch_progress_pct }}%</div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: {{ epoch_progress_pct }}%;"></div>
+        </div>
+        <div class="metric-sub" style="justify-content: space-between; margin-top: 8px;">
+          <span>Slot: <code class="code-tag">{{ current_slot }}</code></span>
+          <span>Latency: <strong style="color: var(--solana-green);">{{ current_slot_time_ms }} ms</strong></span>
+        </div>
+      </div>
+
+      <!-- DeFi TVL Card -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title">Total Value Locked (TVL)</span>
+          <span class="badge badge-success">{{ tvl_change_24h_pct }} 24h</span>
+        </div>
+        <div class="metric-value-huge">${{ current_tvl_b }} <span style="font-size: 1.1rem; color: var(--text-muted);">Billion</span></div>
+        <div class="metric-sub">
+          <span>7d Change: <strong class="{{ tvl_7d_class }}">{{ tvl_change_7d_pct }}</strong></span>
+          <span>•</span>
+          <span>DeFiLlama Keyless Aggregation</span>
+        </div>
+        <div class="chart-container">
+          <canvas id="tvlChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Validator Decentralization Card -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title">Validator Decentralization</span>
+          <span class="badge">Nakamoto: {{ nakamoto_coefficient }}</span>
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <div style="flex: 1;">
+            <div class="metric-value-large">{{ active_validators }} <span style="font-size: 0.9rem; color: var(--text-muted);">Active</span></div>
+            <div class="metric-sub" style="margin-bottom: 8px;">
+              <span>Delinquency: <strong style="color: {{ delinquency_color }};">{{ delinquency_rate_pct }}%</strong> ({{ delinquent_validators }} nodes)</span>
+            </div>
+            <div class="metric-sub">
+              <span>Total Staked: <strong>{{ total_active_stake_sol }}M SOL</strong></span>
+            </div>
+          </div>
+          <div style="width: 140px; height: 140px; flex-shrink: 0;">
+            <canvas id="validatorChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Economic Indicators Card -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title">Economic Indicators & Market</span>
+          <span class="badge">Multi-Source</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">SOL SPOT PRICE</div>
+            <div class="metric-value-large">${{ sol_price }}</div>
+            <div class="metric-sub"><span class="{{ price_change_class }}">{{ price_change_24h_pct }} 24h</span></div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">24H DEX VOLUME</div>
+            <div class="metric-value-large">${{ dex_volume_24h_b }}B</div>
+            <div class="metric-sub"><span>7d: ${{ dex_volume_7d_b }}B</span></div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">EST. MARKET CAP</div>
+            <div class="metric-value-large">${{ market_cap_b }}B</div>
+            <div class="metric-sub"><span>{{ circulating_supply_m }}M SOL circulating</span></div>
+          </div>
+          <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">MEDIAN TX FEE</div>
+            <div class="metric-value-large">${{ median_tx_fee_usd }}</div>
+            <div class="metric-sub"><span>~{{ median_tx_fee_sol }} SOL</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stablecoin Liquidity Card -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title">On-Chain Stablecoin Supply</span>
+          <span class="badge">Liquidity Base</span>
+        </div>
+        <div class="metric-value-huge">${{ total_stablecoins_b }} <span style="font-size: 1.1rem; color: var(--text-muted);">Billion</span></div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px;">
+          <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: var(--text-muted);">USD STABLES</div>
+            <div style="font-size: 1rem; font-weight: 700; color: #FFF;">${{ usd_stables_b }}B</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: var(--text-muted);">EUR STABLES</div>
+            <div style="font-size: 1rem; font-weight: 700; color: #FFF;">${{ eur_stables_m }}M</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;">
+            <div style="font-size: 0.72rem; color: var(--text-muted);">CAD STABLES</div>
+            <div style="font-size: 1rem; font-weight: 700; color: var(--solana-green);">${{ cad_stables }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Protocols Leaderboard -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title">Top Protocols by TVL</span>
+          <span class="badge">Ecosystem Dominance</span>
+        </div>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Protocol</th>
+              <th>Category</th>
+              <th>TVL</th>
+              <th>24h Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ protocols_table_rows }}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Anomaly Detection Feed -->
+      <div class="bento-card col-span-2">
+        <div class="card-header">
+          <span class="card-title">Autonomous Anomaly Monitor</span>
+          <span class="badge badge-success">{{ anomaly_badge_text }}</span>
+        </div>
+        <div style="margin-top: 8px;">
+          {{ anomaly_feed_html }}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div>Solana Ecosystem Intelligence Suite • Zero API Keys • Public RPC & DeFiLlama</div>
+      <div>Designed for <a href="https://superteam.fun" target="_blank">Superteam Canada</a> • Nyxar Labs</div>
+    </footer>
+  </div>
+
+  <script>
+    // Embedded Chart Data
+    const tpsHistory = {{ tps_history_json }};
+    const tvlLabels = {{ tvl_labels_json }};
+    const tvlValues = {{ tvl_values_json }};
+    const topValidators = {{ top_validators_json }};
+
+    // 1. TPS Sparkline Chart
+    const ctxTps = document.getElementById('tpsSparkline');
+    if (ctxTps && tpsHistory.length) {
+      new Chart(ctxTps, {
+        type: 'line',
+        data: {
+          labels: tpsHistory.map((_, i) => i),
+          datasets: [{
+            data: tpsHistory.reverse(),
+            borderColor: '#14F195',
+            backgroundColor: 'rgba(20, 241, 149, 0.1)',
+            borderWidth: 2,
+            pointRadius: 0,
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } },
+          scales: { x: { display: false }, y: { display: false } }
+        }
+      });
+    }
+
+    // 2. TVL 30-day Line Chart
+    const ctxTvl = document.getElementById('tvlChart');
+    if (ctxTvl && tvlValues.length) {
+      new Chart(ctxTvl, {
+        type: 'line',
+        data: {
+          labels: tvlLabels,
+          datasets: [{
+            label: 'Solana TVL ($B)',
+            data: tvlValues.map(v => (v / 1e9).toFixed(2)),
+            borderColor: '#9945FF',
+            backgroundColor: 'rgba(153, 69, 255, 0.12)',
+            borderWidth: 2.5,
+            pointRadius: 2,
+            pointBackgroundColor: '#14F195',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` $${ctx.raw} Billion`
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#6B7280', font: { size: 10 } }
+            },
+            y: {
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#6B7280', font: { size: 10 }, callback: v => `$${v}B` }
+            }
+          }
+        }
+      });
+    }
+
+    // 3. Validator Stake Doughnut Chart
+    const ctxVal = document.getElementById('validatorChart');
+    if (ctxVal && topValidators.length) {
+      const topStake = topValidators.slice(0, 5).reduce((acc, v) => acc + v.stake_sol, 0);
+      const restStake = {{ total_active_stake_sol_raw }} - topStake;
+      new Chart(ctxVal, {
+        type: 'doughnut',
+        data: {
+          labels: ['Top 5 Nodes', 'Remaining Cluster'],
+          datasets: [{
+            data: [topStake, Math.max(0, restStake)],
+            backgroundColor: ['#14F195', 'rgba(255, 255, 255, 0.1)'],
+            borderColor: '#131823',
+            borderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '72%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` ${(ctx.raw / 1e6).toFixed(1)}M SOL`
+              }
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
