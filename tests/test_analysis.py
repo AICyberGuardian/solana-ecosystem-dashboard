@@ -59,5 +59,16 @@ class TestAnalysis(unittest.TestCase):
         self.assertEqual(res["status"], "OPTIMAL")
         self.assertGreaterEqual(res["score"], 90.0)
 
+    def test_mad_calculation(self):
+        from src.analysis.anomaly_detector import calculate_mad
+        # Normal distribution sample: MAD should be proportional to standard deviation (~1.4826 factor)
+        values = [10.0, 12.0, 11.0, 9.0, 10.5, 10.2, 11.8]
+        mad = calculate_mad(values)
+        self.assertGreater(mad, 0.0)
+        # Verify empty/small list handling
+        self.assertEqual(calculate_mad([]), 0.0)
+        self.assertEqual(calculate_mad([5.0]), 0.0)
+
 if __name__ == "__main__":
     unittest.main()
+

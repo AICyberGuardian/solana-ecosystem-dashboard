@@ -108,6 +108,13 @@ class SolanaRPCCollector:
             "min_tps_1h": min_tps,
             "current_slot_time_ms": current_slot_time_ms,
             "avg_slot_time_ms": avg_slot_time_ms,
+            "simd_0525": {
+                "target_ms": 350.0,
+                "measured_ms": avg_slot_time_ms,
+                "delta_ms": round(avg_slot_time_ms - 350.0, 1),
+                "status": "OPTIMAL" if avg_slot_time_ms <= 360.0 else "ELEVATED",
+                "label": "SIMD-0525 (350ms Target)"
+            },
             "tps_history": tps_samples[:30],
             "slot_time_history": slot_time_samples[:30]
         }
