@@ -149,4 +149,8 @@ class HTMLGenerator:
             rendered = rendered.replace(k, v)
 
         self.output_path.write_text(rendered, encoding="utf-8")
+        # Also write index.html for root hosting compatibility (e.g. GitHub Pages / Vercel)
+        index_path = self.output_path.parent / "index.html"
+        index_path.write_text(rendered, encoding="utf-8")
         return str(self.output_path)
+
