@@ -2,6 +2,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-14F195?logo=github&logoColor=black)](https://aicyberguardian.github.io/solana-ecosystem-dashboard/)
 [![Dependencies: Zero](https://img.shields.io/badge/Dependencies-Zero-success.svg)](#zero-dependency-philosophy)
 [![Solana Mainnet](https://img.shields.io/badge/Network-Solana%20Mainnet--Beta-14F195?logo=solana&logoColor=black)](https://solana.com)
 [![Superteam Canada](https://img.shields.io/badge/Built%20for-Superteam%20Canada-FF0055)](https://superteam.fun)
