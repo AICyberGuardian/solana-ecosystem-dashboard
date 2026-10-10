@@ -1,13 +1,13 @@
 # Solana Ecosystem Status & Telemetry Report
-**Generated:** `2026-10-10T12:53:59Z` | **Health Score:** `97.0/100` (OPTIMAL) | **Zero API Keys**
+**Generated:** `2026-10-10T17:40:49Z` | **Health Score:** `97.0/100` (OPTIMAL) | **Zero API Keys**
 
 ---
 
 ## 1. Executive Summary
 
 The Solana mainnet cluster is operating under **OPTIMAL** parameters with a composite health rating of **97.0/100**.
-Current network throughput stands at **4,757.9 TPS** (1-hour average: 4,464.0 TPS) with an average slot generation interval of **217.1 ms**.
-Total value locked across Solana DeFi protocols totals **$6.20B** (-0.16% 24h delta), backed by **$16.10B** in on-chain stablecoin liquidity.
+Current network throughput stands at **4,637.9 TPS** (1-hour average: 5,216.4 TPS) with an average slot generation interval of **219.2 ms**.
+Total value locked across Solana DeFi protocols totals **$6.22B** (+0.18% 24h delta), backed by **$16.11B** in on-chain stablecoin liquidity.
 
 ---
 
@@ -16,32 +16,32 @@ Total value locked across Solana DeFi protocols totals **$6.20B** (-0.16% 24h de
 | Metric | Current Value | Baseline / Target | Status |
 | :--- | :--- | :--- | :--- |
 | Cluster Health | `ok` | `ok` | Normal |
-| Current Slot | `455,262,598` | N/A | Active |
-| Block Height | `433,299,823` | N/A | Active |
-| Current Epoch | `1053` (84.86% complete) | 432,000 slots | In Progress |
-| Throughput (Current) | `4,757.9 TPS` | > 2,500 TPS | Healthy |
-| Throughput (1h Peak / Min) | `5,072.9` / `4,209.7 TPS` | N/A | Measured |
-| Slot Duration | `217.4 ms` | ~400.0 ms | Normal |
-| Total Transactions | `558,321,034,218` | Monotonic | Active |
+| Current Slot | `455,341,091` | N/A | Active |
+| Block Height | `433,378,268` | N/A | Active |
+| Current Epoch | `1054` (3.03% complete) | 432,000 slots | In Progress |
+| Throughput (Current) | `4,637.9 TPS` | > 2,500 TPS | Healthy |
+| Throughput (1h Peak / Min) | `6,028.3` / `4,630.7 TPS` | N/A | Measured |
+| Slot Duration | `218.2 ms` | ~400.0 ms | Normal |
+| Total Transactions | `558,409,791,964` | Monotonic | Active |
 
 ---
 
 ## 3. Validator Health & Decentralization
 
 - **Active Validators:** 675 nodes
-- **Delinquent Validators:** 6 nodes (0.88% delinquency rate)
-- **Total Active Stake:** 437,858,115.65 SOL
+- **Delinquent Validators:** 5 nodes (0.74% delinquency rate)
+- **Total Active Stake:** 438,728,803.20 SOL
 - **Nakamoto Coefficient:** `17` minimum validators required to compromise consensus (>33.33% total active stake)
 
 ### Top 5 Validators by Active Stake
 
 | Rank | Node / Vote Account | Active Stake (SOL) | Stake Share | Commission |
 | :--- | :--- | :--- | :--- | :--- |
-| #1 | `CcaHc2L4...BzoTN1` | 17,788,627.2 SOL | 4.06% | 7% |
-| #2 | `he1iusun...PauBtk` | 15,954,194.8 SOL | 3.64% | 0% |
-| #3 | `3N7s9zXM...eWiD5g` | 12,299,759.2 SOL | 2.81% | 0% |
-| #4 | `8GbwASqd...GJF8iD` | 11,178,786.7 SOL | 2.55% | 0% |
-| #5 | `CatzoSMU...gZDiqb` | 10,972,769.5 SOL | 2.51% | 5% |
+| #1 | `CcaHc2L4...BzoTN1` | 17,775,444.1 SOL | 4.05% | 7% |
+| #2 | `he1iusun...PauBtk` | 15,954,956.6 SOL | 3.64% | 0% |
+| #3 | `3N7s9zXM...eWiD5g` | 12,313,355.7 SOL | 2.81% | 0% |
+| #4 | `8GbwASqd...GJF8iD` | 11,145,933.5 SOL | 2.54% | 0% |
+| #5 | `CatzoSMU...gZDiqb` | 10,754,664.2 SOL | 2.45% | 5% |
 
 ---
 
@@ -49,11 +49,11 @@ Total value locked across Solana DeFi protocols totals **$6.20B** (-0.16% 24h de
 
 | Indicator | Value (USD) | 24h Change / Details |
 | :--- | :--- | :--- |
-| SOL Spot Price | `$109.66` | +0.00% (Source: Coinbase) |
-| Estimated Circulating Market Cap | `$64.57B` | 588.8M SOL circulating |
+| SOL Spot Price | `$109.99` | +0.00% (Source: Coinbase) |
+| Estimated Circulating Market Cap | `$64.77B` | 588.8M SOL circulating |
 | 24h DEX Trading Volume | `$1.98B` | -25.21% delta |
-| Total DeFi TVL | `$6.20B` | -0.16% delta |
-| Circulating Stablecoins | `$16.10B` | USD: $16.03B, CAD: $1,422 |
+| Total DeFi TVL | `$6.22B` | +0.18% delta |
+| Circulating Stablecoins | `$16.11B` | USD: $16.03B, CAD: $1,421 |
 | Median Transaction Fee | `$0.00110` | ~0.000010 SOL |
 
 ---
