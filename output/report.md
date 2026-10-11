@@ -1,13 +1,13 @@
 # Solana Ecosystem Status & Telemetry Report
-**Generated:** `2026-10-11T00:20:59Z` | **Health Score:** `97.0/100` (OPTIMAL) | **Zero API Keys**
+**Generated:** `2026-10-11T06:12:38Z` | **Health Score:** `97.0/100` (OPTIMAL) | **Zero API Keys**
 
 ---
 
 ## 1. Executive Summary
 
 The Solana mainnet cluster is operating under **OPTIMAL** parameters with a composite health rating of **97.0/100**.
-Current network throughput stands at **4,896.6 TPS** (1-hour average: 4,850.4 TPS) with an average slot generation interval of **218.3 ms**.
-Total value locked across Solana DeFi protocols totals **$6.21B** (+0.04% 24h delta), backed by **$16.12B** in on-chain stablecoin liquidity.
+Current network throughput stands at **4,606.3 TPS** (1-hour average: 4,565.2 TPS) with an average slot generation interval of **218.4 ms**.
+Total value locked across Solana DeFi protocols totals **$6.20B** (+0.06% 24h delta), backed by **$16.10B** in on-chain stablecoin liquidity.
 
 ---
 
@@ -16,13 +16,13 @@ Total value locked across Solana DeFi protocols totals **$6.21B** (+0.04% 24h de
 | Metric | Current Value | Baseline / Target | Status |
 | :--- | :--- | :--- | :--- |
 | Cluster Health | `ok` | `ok` | Normal |
-| Current Slot | `455,450,959` | N/A | Active |
-| Block Height | `433,488,129` | N/A | Active |
-| Current Epoch | `1054` (28.46% complete) | 432,000 slots | In Progress |
-| Throughput (Current) | `4,896.6 TPS` | > 2,500 TPS | Healthy |
-| Throughput (1h Peak / Min) | `5,678.2` / `4,222.7 TPS` | N/A | Measured |
-| Slot Duration | `219.8 ms` | ~400.0 ms | Normal |
-| Total Transactions | `558,527,864,703` | Monotonic | Active |
+| Current Slot | `455,547,762` | N/A | Active |
+| Block Height | `433,584,923` | N/A | Active |
+| Current Epoch | `1054` (50.87% complete) | 432,000 slots | In Progress |
+| Throughput (Current) | `4,606.3 TPS` | > 2,500 TPS | Healthy |
+| Throughput (1h Peak / Min) | `5,091.8` / `4,232.0 TPS` | N/A | Measured |
+| Slot Duration | `217.4 ms` | ~400.0 ms | Normal |
+| Total Transactions | `558,625,411,142` | Monotonic | Active |
 
 ---
 
@@ -49,12 +49,12 @@ Total value locked across Solana DeFi protocols totals **$6.21B** (+0.04% 24h de
 
 | Indicator | Value (USD) | 24h Change / Details |
 | :--- | :--- | :--- |
-| SOL Spot Price | `$109.97` | +0.00% (Source: Coinbase) |
-| Estimated Circulating Market Cap | `$64.78B` | 589.1M SOL circulating |
-| 24h DEX Trading Volume | `$1.98B` | -25.21% delta |
-| Total DeFi TVL | `$6.21B` | +0.04% delta |
-| Circulating Stablecoins | `$16.12B` | USD: $16.04B, CAD: $1,422 |
-| Median Transaction Fee | `$0.00110` | ~0.000010 SOL |
+| SOL Spot Price | `$109.30` | +0.00% (Source: Coinbase) |
+| Estimated Circulating Market Cap | `$64.38B` | 589.1M SOL circulating |
+| 24h DEX Trading Volume | `$1.58B` | -20.13% delta |
+| Total DeFi TVL | `$6.20B` | +0.06% delta |
+| Circulating Stablecoins | `$16.10B` | USD: $16.03B, CAD: $1,422 |
+| Median Transaction Fee | `$0.00109` | ~0.000010 SOL |
 
 ---
 
