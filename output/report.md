@@ -1,13 +1,13 @@
 # Solana Ecosystem Status & Telemetry Report
-**Generated:** `2026-10-17T01:26:05Z` | **Health Score:** `97.0/100` (OPTIMAL) | **Zero API Keys**
+**Generated:** `2026-10-17T05:58:49Z` | **Health Score:** `97.0/100` (OPTIMAL) | **Zero API Keys**
 
 ---
 
 ## 1. Executive Summary
 
 The Solana mainnet cluster is operating under **OPTIMAL** parameters with a composite health rating of **97.0/100**.
-Current network throughput stands at **5,231.8 TPS** (1-hour average: 4,812.0 TPS) with an average slot generation interval of **216.2 ms**.
-Total value locked across Solana DeFi protocols totals **$5.95B** (+0.46% 24h delta), backed by **$15.75B** in on-chain stablecoin liquidity.
+Current network throughput stands at **4,276.0 TPS** (1-hour average: 4,639.8 TPS) with an average slot generation interval of **216.5 ms**.
+Total value locked across Solana DeFi protocols totals **$5.97B** (-0.28% 24h delta), backed by **$15.70B** in on-chain stablecoin liquidity.
 
 ---
 
@@ -16,32 +16,32 @@ Total value locked across Solana DeFi protocols totals **$5.95B** (+0.46% 24h de
 | Metric | Current Value | Baseline / Target | Status |
 | :--- | :--- | :--- | :--- |
 | Cluster Health | `ok` | `ok` | Normal |
-| Current Slot | `457,853,081` | N/A | Active |
-| Block Height | `435,888,700` | N/A | Active |
-| Current Epoch | `1059` (84.51% complete) | 432,000 slots | In Progress |
-| Throughput (Current) | `5,231.8 TPS` | > 2,500 TPS | Healthy |
-| Throughput (1h Peak / Min) | `5,848.2` / `4,280.9 TPS` | N/A | Measured |
-| Slot Duration | `213.5 ms` | ~400.0 ms | Normal |
-| Total Transactions | `561,134,414,906` | Monotonic | Active |
+| Current Slot | `457,928,716` | N/A | Active |
+| Block Height | `435,964,115` | N/A | Active |
+| Current Epoch | `1060` (2.02% complete) | 432,000 slots | In Progress |
+| Throughput (Current) | `4,276.0 TPS` | > 2,500 TPS | Healthy |
+| Throughput (1h Peak / Min) | `5,299.4` / `4,135.2 TPS` | N/A | Measured |
+| Slot Duration | `219.0 ms` | ~400.0 ms | Normal |
+| Total Transactions | `561,211,179,077` | Monotonic | Active |
 
 ---
 
 ## 3. Validator Health & Decentralization
 
-- **Active Validators:** 671 nodes
+- **Active Validators:** 672 nodes
 - **Delinquent Validators:** 9 nodes (1.32% delinquency rate)
-- **Total Active Stake:** 437,780,683.90 SOL
+- **Total Active Stake:** 438,748,507.50 SOL
 - **Nakamoto Coefficient:** `17` minimum validators required to compromise consensus (>33.33% total active stake)
 
 ### Top 5 Validators by Active Stake
 
 | Rank | Node / Vote Account | Active Stake (SOL) | Stake Share | Commission |
 | :--- | :--- | :--- | :--- | :--- |
-| #1 | `CcaHc2L4...BzoTN1` | 17,561,700.9 SOL | 4.01% | 7% |
-| #2 | `he1iusun...PauBtk` | 15,460,528.3 SOL | 3.53% | 0% |
-| #3 | `3N7s9zXM...eWiD5g` | 12,362,554.9 SOL | 2.82% | 0% |
-| #4 | `8GbwASqd...GJF8iD` | 11,093,073.9 SOL | 2.53% | 0% |
-| #5 | `CatzoSMU...gZDiqb` | 10,200,312.5 SOL | 2.33% | 5% |
+| #1 | `CcaHc2L4...BzoTN1` | 17,532,932.5 SOL | 4.00% | 7% |
+| #2 | `he1iusun...PauBtk` | 15,736,568.1 SOL | 3.59% | 0% |
+| #3 | `3N7s9zXM...eWiD5g` | 12,486,161.3 SOL | 2.85% | 0% |
+| #4 | `8GbwASqd...GJF8iD` | 10,972,882.8 SOL | 2.50% | 0% |
+| #5 | `CatzoSMU...gZDiqb` | 10,191,941.8 SOL | 2.32% | 5% |
 
 ---
 
@@ -49,12 +49,12 @@ Total value locked across Solana DeFi protocols totals **$5.95B** (+0.46% 24h de
 
 | Indicator | Value (USD) | 24h Change / Details |
 | :--- | :--- | :--- |
-| SOL Spot Price | `$104.47` | +0.00% (Source: Coinbase) |
-| Estimated Circulating Market Cap | `$61.57B` | 589.3M SOL circulating |
-| 24h DEX Trading Volume | `$1.92B` | -15.99% delta |
-| Total DeFi TVL | `$5.95B` | +0.46% delta |
-| Circulating Stablecoins | `$15.75B` | USD: $15.67B, CAD: $1,433 |
-| Median Transaction Fee | `$0.00104` | ~0.000010 SOL |
+| SOL Spot Price | `$104.80` | +0.00% (Source: Coinbase) |
+| Estimated Circulating Market Cap | `$61.77B` | 589.4M SOL circulating |
+| 24h DEX Trading Volume | `$1.92B` | -15.98% delta |
+| Total DeFi TVL | `$5.97B` | -0.28% delta |
+| Circulating Stablecoins | `$15.70B` | USD: $15.63B, CAD: $1,433 |
+| Median Transaction Fee | `$0.00105` | ~0.000010 SOL |
 
 ---
 
