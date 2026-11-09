@@ -1,13 +1,13 @@
 # Solana Ecosystem Status & Telemetry Report
-**Generated:** `2026-11-08T23:54:40Z` | **Health Score:** `82.0/100` (HEALTHY) | **Zero API Keys**
+**Generated:** `2026-11-09T05:10:25Z` | **Health Score:** `78.0/100` (HEALTHY) | **Zero API Keys**
 
 ---
 
 ## 1. Executive Summary
 
-The Solana mainnet cluster is operating under **HEALTHY** parameters with a composite health rating of **82.0/100**.
-Current network throughput stands at **1,601.2 TPS** (1-hour average: 1,678.7 TPS) with an average slot generation interval of **214.2 ms**.
-Total value locked across Solana DeFi protocols totals **$5.17B** (-1.14% 24h delta), backed by **$14.88B** in on-chain stablecoin liquidity.
+The Solana mainnet cluster is operating under **HEALTHY** parameters with a composite health rating of **78.0/100**.
+Current network throughput stands at **1,071.8 TPS** (1-hour average: 1,232.3 TPS) with an average slot generation interval of **214.9 ms**.
+Total value locked across Solana DeFi protocols totals **$5.14B** (-0.85% 24h delta), backed by **$14.82B** in on-chain stablecoin liquidity.
 
 ---
 
@@ -16,21 +16,21 @@ Total value locked across Solana DeFi protocols totals **$5.17B** (-1.14% 24h de
 | Metric | Current Value | Baseline / Target | Status |
 | :--- | :--- | :--- | :--- |
 | Cluster Health | `ok` | `ok` | Normal |
-| Current Slot | `467,106,833` | N/A | Active |
-| Block Height | `445,124,958` | N/A | Active |
-| Current Epoch | `1081` (26.58% complete) | 432,000 slots | In Progress |
-| Throughput (Current) | `1,601.2 TPS` | > 2,500 TPS | Healthy |
-| Throughput (1h Peak / Min) | `2,468.1` / `1,334.8 TPS` | N/A | Measured |
-| Slot Duration | `213.5 ms` | ~400.0 ms | Normal |
-| Total Transactions | `565,831,644,054` | Monotonic | Active |
+| Current Slot | `467,195,060` | N/A | Active |
+| Block Height | `445,213,117` | N/A | Active |
+| Current Epoch | `1081` (47.0% complete) | 432,000 slots | In Progress |
+| Throughput (Current) | `1,071.8 TPS` | > 2,500 TPS | Healthy |
+| Throughput (1h Peak / Min) | `1,838.4` / `917.3 TPS` | N/A | Measured |
+| Slot Duration | `207.6 ms` | ~400.0 ms | Normal |
+| Total Transactions | `565,860,400,208` | Monotonic | Active |
 
 ---
 
 ## 3. Validator Health & Decentralization
 
-- **Active Validators:** 661 nodes
-- **Delinquent Validators:** 36 nodes (5.16% delinquency rate)
-- **Total Active Stake:** 433,293,948.35 SOL
+- **Active Validators:** 662 nodes
+- **Delinquent Validators:** 35 nodes (5.02% delinquency rate)
+- **Total Active Stake:** 433,293,949.85 SOL
 - **Nakamoto Coefficient:** `17` minimum validators required to compromise consensus (>33.33% total active stake)
 
 ### Top 5 Validators by Active Stake
@@ -49,12 +49,12 @@ Total value locked across Solana DeFi protocols totals **$5.17B** (-1.14% 24h de
 
 | Indicator | Value (USD) | 24h Change / Details |
 | :--- | :--- | :--- |
-| SOL Spot Price | `$86.35` | +0.00% (Source: Coinbase) |
-| Estimated Circulating Market Cap | `$51.04B` | 591.1M SOL circulating |
-| 24h DEX Trading Volume | `$0.92B` | -38.01% delta |
-| Total DeFi TVL | `$5.17B` | -1.14% delta |
-| Circulating Stablecoins | `$14.88B` | USD: $14.80B, CAD: $1,434 |
-| Median Transaction Fee | `$0.00086` | ~0.000010 SOL |
+| SOL Spot Price | `$87.07` | +0.00% (Source: Coinbase) |
+| Estimated Circulating Market Cap | `$51.47B` | 591.1M SOL circulating |
+| 24h DEX Trading Volume | `$1.00B` | +8.68% delta |
+| Total DeFi TVL | `$5.14B` | -0.85% delta |
+| Circulating Stablecoins | `$14.82B` | USD: $14.74B, CAD: $1,436 |
+| Median Transaction Fee | `$0.00087` | ~0.000010 SOL |
 
 ---
 
@@ -62,7 +62,7 @@ Total value locked across Solana DeFi protocols totals **$5.17B** (-1.14% 24h de
 
 | Severity | Metric | Current Value | Threshold | Details |
 | :--- | :--- | :--- | :--- | :--- |
-| `WARNING` | **Validator Delinquency Rate** | `5.16%` | `<= 5.0%` | 5.16% of validators are currently delinquent or missing votes. |
+| `WARNING` | **Validator Delinquency Rate** | `5.02%` | `<= 5.0%` | 5.02% of validators are currently delinquent or missing votes. |
 
 ---
 
